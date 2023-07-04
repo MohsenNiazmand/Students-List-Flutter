@@ -12,7 +12,9 @@ class DioProvider {
           receiveTimeout: 25000,
           sendTimeout: 25000
       ),
-    );
+    )
+      // ..interceptors.add(  LogInterceptor(responseBody: true, request: true, requestBody: true,error: true,requestHeader: true))
+    ;
     return dio;
   }
 

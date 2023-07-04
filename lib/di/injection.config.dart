@@ -38,7 +38,7 @@ _i1.GetIt $initGetIt(
       () => _i5.HomeRepository(gh<_i4.HomeRemoteDataSource>()));
   gh.factory<_i6.SaveStudentRemoteDataSource>(
       () => _i6.SaveStudentRemoteDataSource(gh<_i3.DioProvider>()));
-  gh.factory<_i7.ISaveStudentRepository>(
-      () => _i7.SaveStudentRepository(gh<_i6.SaveStudentRemoteDataSource>()));
+  gh.factory<_i7.IAddStudentRepository>(
+      () => _i7.AddStudentRepository(gh<_i6.SaveStudentRemoteDataSource>()));
   return getIt;
 }

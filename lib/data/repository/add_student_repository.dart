@@ -3,18 +3,23 @@
 import 'package:injectable/injectable.dart';
 import 'package:studentlist/data/data.dart';
 import 'package:studentlist/data/dataSource/add_student_data_source.dart';
+import 'package:studentlist/di/dio_provider.dart';
 
-abstract class ISaveStudentRepository{
+
+final dioProvider=DioProvider();
+final addStudentRepository=AddStudentRepository(SaveStudentRemoteDataSource(dioProvider));
+
+abstract class IAddStudentRepository{
   Future<StudentData> saveStudent(
       String firstName, String lastName, String course, int score);
 }
 
-@Injectable(as: ISaveStudentRepository)
+@Injectable(as: IAddStudentRepository)
 @Injectable(as: SaveStudentRemoteDataSource)
-class SaveStudentRepository extends ISaveStudentRepository{
+class AddStudentRepository extends IAddStudentRepository{
   final SaveStudentRemoteDataSource remoteDataSource;
 
-  SaveStudentRepository(this.remoteDataSource);
+  AddStudentRepository(this.remoteDataSource);
   @override
   Future<StudentData> saveStudent(String firstName, String lastName, String course, int score) {
     return remoteDataSource.saveStudent(firstName, lastName, course, score);

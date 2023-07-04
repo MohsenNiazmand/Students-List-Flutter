@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: CircularProgressIndicator(),
                         )
                       : const Center(
-                          child: Text("Error Happend"),
+                          child: Text("Error Happened"),
                         )
 
               // }
