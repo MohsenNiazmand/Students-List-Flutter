@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studentlist/data/data.dart';
 import 'package:studentlist/data/repository/home_repository.dart';
+import 'package:studentlist/ui/chart/chart_page.dart';
 import 'package:studentlist/ui/home/home_bloc.dart';
+import 'package:studentlist/ui/polygon/polygon_page.dart';
 
 import '../add_student/add_student_form.dart';
 
@@ -16,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final bloc = HomeBloc(homeRepository);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeBloc>(
@@ -56,14 +59,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: const [Icon(Icons.add), Text('Add Student')],
                   )),
               body: (state is HomeSuccess)
-                  ? ListView.builder(
-                      padding: const EdgeInsets.only(bottom: 84),
-                      itemCount: state.students.length,
-                      itemBuilder: (context, index) {
-                        return _Student(
-                          studentData: state.students[index],
-                        );
-                      })
+                  ? Stack(
+                      children: [
+                        ListView.builder(
+                            padding: const EdgeInsets.only(bottom: 84),
+                            itemCount: state.students.length,
+                            itemBuilder: (context, index) {
+                              return _Student(
+                                studentData: state.students[index],
+                              );
+                            }),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChartExample()));
+                              },
+                              child: Icon(Icons.bar_chart),
+                            ),
+                          ),
+                        ),
+
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PolygonPage()));
+                              },
+                              child: Icon(Icons.format_shapes),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   : (state is HomeLoading)
                       ? const Center(
                           child: CircularProgressIndicator(),

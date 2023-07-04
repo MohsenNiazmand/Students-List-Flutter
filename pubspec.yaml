@@ -41,6 +41,7 @@ dependencies:
   syncfusion_flutter_charts:
   injectable:
   get_it:
+  polygon:
 dev_dependencies:
   flutter_test:
     sdk: flutter
